@@ -58,6 +58,6 @@ describe('Heap', () => {
       descendingOrder.push(heap.delete());
     }
 
-    expect(descendingOrder).toDeepEqual([10, 8, 7, 6, 5, 5, 2, 1]);
+    expect(descendingOrder).toEqual([10, 8, 7, 6, 5, 5, 2, 1]);
   });
 });
