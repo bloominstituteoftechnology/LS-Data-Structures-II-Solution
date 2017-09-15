@@ -1,4 +1,6 @@
 // https://msdn.microsoft.com/en-us/library/aa289150(v=vs.71).aspx
+const Queue = require('./queue-helper');
+
 class BinarySearchTree {
   constructor(value) {
     this.value = value;
@@ -50,9 +52,8 @@ class BinarySearchTree {
     }
   }
 
-  /* eslint-disable global-require */
   breadthFirstForEach(cb) {
-    const queue = require('./queue-helper');
+    const queue = new Queue();
     queue.enqueue(this);
     while (!queue.isEmpty()) {
       const node = queue.dequeue();
