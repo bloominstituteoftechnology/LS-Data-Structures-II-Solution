@@ -40,10 +40,7 @@ class Heap {
     bubbleUp(index) {
         const parent = Math.floor(index/2);
         if (parent > 0 && this.storage[parent] < this.storage[index]) {
-            this.storage[0] = this.storage[parent];
-            this.storage[parent] = this.storage[index];
-            this.storage[index] = this.storage[0];
-            this.storage[0] = null;
+            [this.storage[parent], this.storage[index]] = [this.storage[index], this.storage[parent]];
             this.bubbleUp(parent);
         }
     }
@@ -61,10 +58,7 @@ class Heap {
             }
 
             if (this.storage[index] < this.storage[maxChild]) {
-                this.storage[0] = this.storage[maxChild];
-                this.storage[maxChild] = this.storage[index];
-                this.storage[index] = this.storage[0];
-                this.storage[0] = null;
+                [this.storage[maxChild], this.storage[index]] = [this.storage[index], this.storage[maxChild]];
                 this.siftDown(maxChild);
             }
         }
