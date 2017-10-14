@@ -71,15 +71,7 @@ class Graph {
     }
 
     checkIfEdgeExists(fromVertex, toVertex) {
-        const fromEdges = fromVertex.edges;
-        const toEdges = toVertex.edges;
-        const toVertexEdgeIndex = fromEdges.findIndex(node => {
-            return node.value === toVertex.value;
-        });
-        const fromVertexEdgeIndex = toEdges.findIndex(node => {
-            return node.value === fromVertex.value;
-        });
-        return (toVertexEdgeIndex > -1) && (fromVertexEdgeIndex > -1);
+       return (toVertex.edges.includes(fromVertex) && fromVertex.edges.includes(toVertex));
     }
 
     addEdge(fromVertex, toVertex) {
@@ -91,10 +83,8 @@ class Graph {
 
     removeEdge(fromVertex, toVertex) {
         if (this.checkIfEdgeExists(fromVertex, toVertex)) {
-            const fromEdges = fromVertex.edges;
-            const toEdges = toVertex.edges;
-            fromVertex.edges = fromEdges.filter(edge => edge.value !== toVertex.value);
-            toVertex.edges = toEdges.filter(edge => edge.value !== fromVertex.value);
+            fromVertex.edges = fromVertex.edges.filter(edge => edge.value !== toVertex.value);
+            toVertex.edges = toVertex.edges.filter(edge => edge.value !== fromVertex.value);
             if (fromVertex.numberOfEdges === 0) this.removeVertex(fromVertex.value);
             if (toVertex.numberOfEdges === 0) this.removeVertex(toVertex.value);
         }

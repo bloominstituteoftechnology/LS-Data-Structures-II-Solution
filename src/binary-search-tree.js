@@ -1,4 +1,5 @@
 // https://msdn.microsoft.com/en-us/library/aa289150(v=vs.71).aspx
+/* eslint-disable */
 const Queue = require('./queue-helper');
 
 class BinarySearchTree {
