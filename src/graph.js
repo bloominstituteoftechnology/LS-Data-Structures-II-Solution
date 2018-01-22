@@ -37,7 +37,7 @@ class Graph {
             edges
         });
         if (edges.length > 0) {
-            edges.forEach(edge => {
+            edges.forEach((edge) => {
                 this.addEdge(newVertex, edge);
             });
         }
@@ -65,7 +65,7 @@ class Graph {
         });
         if (index === -1) return;
         const removedVertex = this.vertices.splice(index, 1)[0];
-        removedVertex.edges.forEach(node => {
+        removedVertex.edges.forEach((node) => {
             this.removeEdge(removedVertex, node);
         });
     }
@@ -75,10 +75,14 @@ class Graph {
     }
 
     addEdge(fromVertex, toVertex) {
-        if (!this.checkIfEdgeExists(fromVertex, toVertex)) {
-            fromVertex.pushToEdges(toVertex);
-            toVertex.pushToEdges(fromVertex);
-        }
+        fromVertex.pushToEdges(toVertex);
+        toVertex.pushToEdges(fromVertex);
+        fromVertex.edges = fromVertex.edges.filter((edge, i) => {
+            return fromVertex.edges.indexOf(edge) === i;
+        });
+        toVertex.edges = toVertex.egdges.filter((edge, i) => {
+            return toVertex.edges.indexOf(edge) === i;
+        });
     }
 
     removeEdge(fromVertex, toVertex) {
