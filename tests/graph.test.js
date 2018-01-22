@@ -22,19 +22,13 @@ describe('Graph', () => {
     expect(graph.contains('Hello World!')).toBe(true);
   });
 
-  it('should properly remove nodes', () => {
-    graph.addVertex('hi there');
-    graph.removeVertex('hi there');
-    expect(graph.contains('hi there')).toBe(false);
-  });
-
   it('should automatically create an edge between two nodes if there is only two nodes in the graph', () => {
     const pineapple = graph.addVertex('pineapple');
     const banana = graph.addVertex('banana');
     expect(graph.checkIfEdgeExists(pineapple, banana)).toBe(true);
   });
 
-  it('should create edges between two nodes', () => {
+  it('should be able to create edges between two nodes', () => {
     const pineapple = graph.addVertex('pineapple');
     const banana = graph.addVertex('banana');
     const mango = graph.addVertex('mango', [pineapple]);
@@ -50,6 +44,19 @@ describe('Graph', () => {
     graph.addEdge(crocodile, monkey);
     graph.removeEdge(monkey, human);
     expect(graph.checkIfEdgeExists(monkey, human)).toBe(false);
+  });
+  
+  it('should properly remove nodes', () => {
+    const n1 = graph.addVertex('hi there');
+    const n2 = graph.addVertex('see ya');
+    const n3 = graph.addVertex('nice day');
+    graph.addEdge(n1, n3);
+    expect(graph.checkIfEdgeExists(n1, n2)).toBe(true);
+    expect(graph.checkIfEdgeExists(n1, n3)).toBe(true);
+    graph.removeVertex('hi there');
+    expect(graph.contains('hi there')).toBe(false);
+    expect(graph.checkIfEdgeExists(n1, n2)).toBe(false);
+    expect(graph.checkIfEdgeExists(n1, n3)).toBe(false);
   });
 
   it('should remove nodes without any edges', () => {
